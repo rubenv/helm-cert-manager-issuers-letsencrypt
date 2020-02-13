@@ -10,6 +10,5 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-production
     solvers:
-    - dns01:
-        {{ .Values.dnsSolvers | toYaml }}
+    - dns01: {{ .Values.dnsSolvers | toJson }}
 {{ end }}
