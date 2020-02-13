@@ -20,7 +20,7 @@ jobs:
       run: |
           mkdir -p /tmp/out
           helm init -c
-          helm package -d /tmp/out ./cert-manager-crds
+          helm package -d /tmp/out ./cert-manager-issuers-letsencrypt
 
           git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git fetch
