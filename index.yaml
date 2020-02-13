@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  cert-manager-issuers-letsencrypt:
+  - appVersion: 0.1.0
+    created: "2020-02-13T15:57:07.278417517Z"
+    description: cert-manager cluster issuers for Let's Encrypt
+    digest: c8c529df97ef7f5585521cb315ddcd6047eeb22127940b1a3378543487ab3ee5
+    name: cert-manager-issuers-letsencrypt
+    urls:
+    - cert-manager-issuers-letsencrypt-0.1.0.tgz
+    version: 0.1.0
+generated: "2020-02-13T15:57:07.278062417Z"
