@@ -1,8 +1,8 @@
 name: Publish
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 jobs:
   test:
     name: Build
@@ -14,12 +14,18 @@ jobs:
       with:
         persist-credentials: false
 
+    - uses: olegtarasov/get-tag@v2
+      id: tagName
+
     - name: Package and publish chart
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION: ${{ steps.tagName.outputs.tag }}
       run: |
           mkdir -p /tmp/out
+          sed -i -e "s,{{VERSION}},$VERSION," cert-manager-issuers-letsencrypt/Chart.yaml
           helm package -d /tmp/out ./cert-manager-issuers-letsencrypt
+          git checkout .
 
           git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           git fetch
