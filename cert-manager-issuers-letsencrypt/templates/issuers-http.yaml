@@ -1,3 +1,4 @@
+{{- if not .Values.dnsSolvers }}
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
@@ -27,3 +28,4 @@ spec:
     solvers:
     - http01:
         ingress: {}
+{{- end }}
