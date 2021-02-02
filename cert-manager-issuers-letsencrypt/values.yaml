@@ -1,1 +1,19 @@
 dnsSolvers: {}
+# true if staging ACME URL should be used: https://acme-staging-v02.api.letsencrypt.org/directory
+# default is false for production ACME URL: https://acme-v02.api.letsencrypt.org/directory
+staging: false
+
+# If empty string cluster issuer name will depend on staging flag
+# for staging: letsencrypt-staging-http
+# for production: letsencrypt-production-http
+#
+# Set not empty string to override defaults
+clusterIssuerName: ""
+
+# Name of a secret used to store the ACME account private key
+# If empty string cluster issuer name will depend on staging flag
+# for staging: letsencrypt-staging
+# for production: letsencrypt-production
+#
+# Set not empty string to override defaults
+privateKeySecretRef: ""

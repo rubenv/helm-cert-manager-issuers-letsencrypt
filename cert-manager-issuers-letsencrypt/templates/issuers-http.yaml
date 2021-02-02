@@ -1,13 +1,29 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
+  {{- if .Values.clusterIssuerName }}
+  name: {{ .Values.clusterIssuerName }}
+  {{- else if .Values.staging }}
+  name: letsencrypt-staging-http
+  {{- else }}
   name: letsencrypt-production-http
+  {{- end }}
 spec:
   acme:
+    {{- if .Values.staging }}
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    {{- else }}
     server: https://acme-v02.api.letsencrypt.org/directory
+    {{- end }}
     email: {{ required "The 'email' value must be set!" .Values.email }}
     privateKeySecretRef:
+      {{- if .Values.privateKeySecretRef }}
+      name: {{ .Values.privateKeySecretRef }}
+      {{- else if .Values.staging }}
+      name: letsencrypt-staging
+      {{- else }}
       name: letsencrypt-production
+      {{- end }}
     solvers:
     - http01:
         ingress: {}
