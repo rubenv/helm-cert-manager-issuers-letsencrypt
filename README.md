@@ -18,7 +18,9 @@ The following table lists the configurable parameters of the cert-manager-issuer
 Parameter | Description | Default
 --- | --- | ---
 `dnsSolvers` | DNS solver configuration block | ``
-
+`staging` | true if staging ACME URL should be used | false
+`clusterIssuerName` | ClusterIssuer name, set to non empty string to override defaults | `letsencrypt-production-http` for staging=false or `letsencrypt-staging-http` for staging=true
+`privateKeySecretRef` | Name of a secret used to store the ACME account private key, set to non empty string to override defaults | `letsencrypt-production` for staging=false or `letsencrypt-staging` for staging=true
 ## License
 
 This app is distributed under the [MIT](LICENSE) license.

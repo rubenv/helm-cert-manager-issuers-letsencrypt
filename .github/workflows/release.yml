@@ -13,6 +13,10 @@ jobs:
       uses: actions/checkout@v2
       with:
         persist-credentials: false
+    
+    - name: Check formatting
+      run: |
+          helm lint ./cert-manager-issuers-letsencrypt
 
     - uses: olegtarasov/get-tag@v2
       id: tagName
@@ -23,7 +27,7 @@ jobs:
         VERSION: ${{ steps.tagName.outputs.tag }}
       run: |
           mkdir -p /tmp/out
-          sed -i -e "s,{{VERSION}},$VERSION," cert-manager-issuers-letsencrypt/Chart.yaml
+          sed -i -e "s/appVersion:.*/appVersion: $VERSION/" cert-manager-issuers-letsencrypt/Chart.yaml
           helm package -d /tmp/out ./cert-manager-issuers-letsencrypt
           git checkout .
 
